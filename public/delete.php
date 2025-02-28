@@ -26,7 +26,7 @@ if (isset($_GET['file_id'])) {
                 $delete_stmt = $pdo->prepare("DELETE FROM files WHERE id = :id");
                 $delete_stmt->bindParam(':id', $file_id);
                 $delete_stmt->execute();
-                header("Location: profile.php");
+                header("Location: index.php");
                 exit();
             } else {
                 $error = "Erreur lors de la suppression du fichier.";
