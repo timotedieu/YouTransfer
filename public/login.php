@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($email) && !empty($password)) {
         try {
-            $stmt = $pdo->prepare("SELECT id, email, password FROM users WHERE email = :email");
+            $stmt = $pdo->prepare("SELECT id, email, password, role FROM users WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
             
@@ -17,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($user && password_verify($password, $user['password'])) {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_email'] = $user['email'];
-                header("Location: profile.php");
+                $_SESSION['role'] = $user['role'];
+                header("Location: index.php");
                 exit();
             } else {
                 $error = "Email ou mot de passe incorrect.";
