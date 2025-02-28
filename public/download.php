@@ -7,29 +7,41 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$user_id = $_SESSION['user_id'];
+
 if (isset($_GET['file_id'])) {
     $file_id = $_GET['file_id'];
 
     try {
-        $stmt = $pdo->prepare("SELECT file_name FROM files WHERE id = :id");
-        $stmt->bindParam(':id', $file_id);
+        $stmt = $pdo->prepare("SELECT status FROM reservations WHERE user_id = :user_id AND file_id = :file_id");
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':file_id', $file_id);
         $stmt->execute();
-        $file = $stmt->fetch();
+        $reservation = $stmt->fetch();
 
-        if ($file) {
-            $file_path = "uploads/" . $file['file_name'];
+        if ($reservation && $reservation['status'] === 'approved') {
+            $stmt = $pdo->prepare("SELECT file_name FROM files WHERE id = :id");
+            $stmt->bindParam(':id', $file_id);
+            $stmt->execute();
+            $file = $stmt->fetch();
 
-            if (file_exists($file_path)) {
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
-                header('Content-Length: ' . filesize($file_path));
-                readfile($file_path);
-                exit();
+            if ($file) {
+                $file_path = "uploads/" . $file['file_name'];
+
+                if (file_exists($file_path)) {
+                    header('Content-Type: application/octet-stream');
+                    header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
+                    header('Content-Length: ' . filesize($file_path));
+                    readfile($file_path);
+                    exit();
+                } else {
+                    $error = "Fichier introuvable.";
+                }
             } else {
-                $error = "Fichier introuvable.";
+                $error = "Fichier non trouvé.";
             }
         } else {
-            $error = "Fichier non trouvé.";
+            $error = "Vous n'avez pas la permission de télécharger ce fichier.";
         }
     } catch (PDOException $e) {
         $error = "Erreur : " . $e->getMessage();
