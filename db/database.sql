@@ -1,4 +1,4 @@
-CREATE DATABASE evaluation_php;
+CREATE DATABASE youtransfer;
 USE evaluation_php;
 
 CREATE TABLE users (
