@@ -20,8 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['file'])) {
             $stmt->bindParam(':user_id', $user_id);
             $stmt->bindParam(':file_name', $file_name);
             $stmt->execute();
-            header("Location: index.php");
-            exit();
+            $success = "Fichier envoyé avec succès.";
         } catch (PDOException $e) {
             $error = "Erreur lors de l'upload : " . $e->getMessage();
         }
@@ -38,21 +37,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['file'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload de fichier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script src="assets/js/script.js" defer></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+    <?php include('navbar.php'); ?>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Upload de fichier</h2>
-                        <?php if (isset($error)): ?>
-                            <div class="alert alert-danger">
-                                <?php echo htmlspecialchars($error); ?>
-                            </div>
-                        <?php endif; ?>
+                        <?php if (isset($error)) echo "<p class='alert alert-danger'>$error</p>"; ?>
+                        <?php if (isset($success)) echo "<p class='alert alert-success'>$success</p>"; ?>
                         <form method="post" action="" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="file" class="form-label">Choisir un fichier</label>
