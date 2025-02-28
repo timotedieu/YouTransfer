@@ -1,5 +1,5 @@
 <?php
-require 'config/config.php';
+require('../config/config.php');
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -30,29 +30,37 @@ try {
     <script src="assets/js/script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h2 class="mb-4">Bienvenue sur votre page d'accueil</h2>
-        <a href="upload.php" class="btn btn-primary mb-3">Envoyer un fichier</a>
-        
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger">
-                <?php echo htmlspecialchars($error); ?>
-            </div>
-        <?php endif; ?>
-        
-        <h3>Vos fichiers :</h3>
-        <ul class="list-group">
-            <?php foreach ($files as $file): ?>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <?php echo htmlspecialchars($file['file_name']); ?>
-                    <div>
-                        <a href="download.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-success">Télécharger</a>
-                        <a href="delete.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-danger">Supprimer</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Bienvenue sur votre page d'accueil</h2>
+                        <a href="upload.php" class="btn btn-primary mb-3">Envoyer un fichier</a>
+                        
+                        <?php if (isset($error)): ?>
+                            <div class="alert alert-danger">
+                                <?php echo htmlspecialchars($error); ?>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <h3>Vos fichiers :</h3>
+                        <ul class="list-group">
+                            <?php foreach ($files as $file): ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <?php echo htmlspecialchars($file['file_name']); ?>
+                                    <div>
+                                        <a href="download.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-success">Télécharger</a>
+                                        <a href="delete.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-danger">Supprimer</a>
+                                    </div>
+                                    <span class="badge bg-info"><?php echo $file['downloads']; ?> Téléchargements</span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
                     </div>
-                    <span class="badge bg-info"><?php echo $file['downloads']; ?> Téléchargements</span>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

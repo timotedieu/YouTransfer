@@ -1,5 +1,5 @@
 <?php
-require 'config/config.php';
+require('../config/config.php');
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -42,22 +42,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['file'])) {
     <script src="assets/js/script.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h2 class="mb-4">Upload de fichier</h2>
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger">
-                <?php echo htmlspecialchars($error); ?>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Upload de fichier</h2>
+                        <?php if (isset($error)): ?>
+                            <div class="alert alert-danger">
+                                <?php echo htmlspecialchars($error); ?>
+                            </div>
+                        <?php endif; ?>
+                        <form method="post" action="" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Choisir un fichier</label>
+                                <input type="file" name="file" class="form-control" id="file" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+                        </form>
+                        <a href="index.php" class="btn btn-secondary mt-3">Retour à la page d'accueil</a>
+                    </div>
+                </div>
             </div>
-        <?php endif; ?>
-        <form method="post" action="" enctype="multipart/form-data">
-            <div class="mb-3">
-                <input type="file" name="file" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Envoyer</button>
-        </form>
-        <a href="index.php" class="btn btn-secondary mt-3">Retour à la page d'accueil</a>
+        </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

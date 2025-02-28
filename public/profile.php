@@ -1,5 +1,5 @@
 <?php
-require 'config/config.php';
+require('../config/config.php');
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
@@ -36,18 +36,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['file'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload de fichier</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Upload de fichier</h2>
-        <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
-        <?php if (isset($success)) echo "<p class='success'>$success</p>"; ?>
-        <form method="post" action="" enctype="multipart/form-data">
-            <input type="file" name="file" required>
-            <button type="submit">Envoyer</button>
-        </form>
-        <a href="profile.php">Retour au profil</a>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Upload de fichier</h2>
+                        <?php if (isset($error)) echo "<p class='alert alert-danger'>$error</p>"; ?>
+                        <?php if (isset($success)) echo "<p class='alert alert-success'>$success</p>"; ?>
+                        <form method="post" action="" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="file" class="form-label">Choisir un fichier</label>
+                                <input type="file" name="file" class="form-control" id="file" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Envoyer</button>
+                        </form>
+                        <a href="profile.php" class="btn btn-link mt-3">Retour au profil</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
