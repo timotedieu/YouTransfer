@@ -34,18 +34,18 @@ Voici les étapes pour installer et utiliser ce projet :
 1. Clonez ce dépôt ou téléchargez les fichiers.  
 2. Configurez votre serveur local avec PHP et MySQL.
 3. Importez la base de données à partir du fichier `database.sql` (inclus dans le projet).
-4. Assurez-vous d'avoir les bonnes configurations dans le fichier de connexion à la base de données (`db.php`).
-5. Lancez votre serveur local et ouvrez `index.php` dans votre navigateur.
+4. Assurez-vous d'avoir les bonnes configurations dans le fichier de connexion à la base de données (`config/config.php`).
+5. Lancez votre serveur local et ouvrez `public/index.php` dans votre navigateur.
 
 ## Structure des fichiers
 
-- `index.php` : Page d'accueil de la plateforme.  
-- `signup.php` : Page d'inscription des utilisateurs.  
-- `login.php` : Page de connexion des utilisateurs.  
-- `profile.php` : Page permettant de modifier le profil.  
-- `upload.php` : Page pour télécharger des fichiers.  
-- `download.php` : Page pour télécharger les fichiers réservés.  
-- `delete.php` : Page permettant de supprimer des fichiers.  
-- `reserve.php` : Page de réservation pour le téléchargement des fichiers.  
-- `db.php` : Fichier de configuration de la base de données.  
-- `database.sql` : Script pour créer la base de données et ses tables.
+- `public/index.php` : Page d'accueil de la plateforme.  
+- `public/signup.php` : Page d'inscription des utilisateurs.  
+- `public/login.php` : Page de connexion des utilisateurs.  
+- `public/profile.php` : Page permettant de modifier le profil.  
+- `public/upload.php` : Page pour télécharger des fichiers.  
+- `public/download.php` : Page pour télécharger les fichiers réservés.  
+- `public/delete.php` : Page permettant de supprimer des fichiers.  
+- `public/logout.php` : Page permettant de se déconnecter.  
+- `config/config.php` : Fichier de configuration de la base de données.  
+- `db/database.sql` : Script pour créer la base de données et ses tables.
