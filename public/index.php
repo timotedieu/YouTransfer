@@ -30,6 +30,7 @@ try {
     <script src="assets/js/script.js" defer></script>
 </head>
 <body>
+    <?php include('navbar.php'); ?>
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -52,6 +53,7 @@ try {
                                     <div>
                                         <a href="download.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-success">Télécharger</a>
                                         <a href="delete.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-danger">Supprimer</a>
+                                        <a href="reserve.php?file_id=<?php echo $file['id']; ?>" class="btn btn-sm btn-warning">Réserver</a>
                                     </div>
                                     <span class="badge bg-info"><?php echo $file['downloads']; ?> Téléchargements</span>
                                 </li>
@@ -62,7 +64,6 @@ try {
             </div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
