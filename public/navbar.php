@@ -16,6 +16,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="edit_profile.php">Modifier le profil</a>
                     </li>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="approve_reservations.php">Approuver les réservations</a>
+                        </li>
+                    <?php endif; ?>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Déconnexion</a>
                     </li>
